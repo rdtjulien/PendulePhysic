@@ -98,40 +98,51 @@ function compute_rmse(p)
     return sqrt(err / (4N_tracker))
 end
 
-#Optim
-initial = [10.0, 3.0, 0.00, 0.00, 0.0, 0.0]
+best_global_rmse = Inf
+best_global_params = nothing
 
-lower = [0.1, 0.1, 0.0, 0.0, -10.0, -10.0]
-upper = [30.0, 30.0, 1.0, 1.0,  10.0,  10.0]
+for k in 1:30
+    initial = [k, 3.0, 0.0, 0.0, 0.0, 0.0]
 
-result = optimize(compute_rmse, lower, upper, initial, Fminbox(NelderMead()), Optim.Options(iterations=50_000, show_trace=false))
+    lower = [0.1, 0.1, 0.0, 0.0, -10.0, -10.0]
+    upper = [30.0, 30.0, 1.0, 1.0,  10.0,  10.0]
 
-best = Optim.minimizer(result)
-best_rmse = Optim.minimum(result)
 
-amp_x1 = maximum(tracker_x1) - minimum(tracker_x1)
-amp_y1 = maximum(tracker_y1) - minimum(tracker_y1)
-amp_x2 = maximum(tracker_x2) - minimum(tracker_x2)
-amp_y2 = maximum(tracker_y2) - minimum(tracker_y2)
+    result = optimize(compute_rmse, lower, upper, initial, Fminbox(NelderMead()), Optim.Options(iterations=50_000, show_trace=false))
 
-amp_moyenne = (amp_x1 + amp_y1 + amp_x2 + amp_y2) / 4
+    local_params = Optim.minimizer(result)
+    local_rmse   = Optim.minimum(result)
 
-rmse_pct = (best_rmse / amp_moyenne) * 100
+    amp_x1 = maximum(tracker_x1) - minimum(tracker_x1)
+    amp_y1 = maximum(tracker_y1) - minimum(tracker_y1)
+    amp_x2 = maximum(tracker_x2) - minimum(tracker_x2)
+    amp_y2 = maximum(tracker_y2) - minimum(tracker_y2)
+    amp_moyenne = (amp_x1 + amp_y1 + amp_x2 + amp_y2) / 4
 
-println("m1 = ", best[1])
-println("m2 = ", best[2])
-println("c1 = ", best[3])
-println("c2 = ", best[4])
-println("v_angulaire1 = ", best[5])
-println("v_angulaire2 = ", best[6])
-println("SRMSE = ", round(rmse_pct, digits=3), " %")
+    local_srmse = (local_rmse / amp_moyenne) * 100
 
-m1 = best[1]
-m2 = best[2]
-c1 = best[3]
-c2 = best[4]
-v_angulaire1 = best[5]
-v_angulaire2 = best[6]
+    println("$k")
+
+    if local_rmse < best_global_rmse
+        best_global_rmse = local_rmse
+        best_global_params = copy(local_params)
+        println("Best ", local_srmse)
+    end
+end
+
+println("m1 = ", best_global_params[1])
+println("m2 = ", best_global_params[2])
+println("c1 = ", best_global_params[3])
+println("c2 = ", best_global_params[4])
+println("v_angulaire1 = ", best_global_params[5])
+println("v_angulaire2 = ", best_global_params[6])
+
+m1 = best_global_params[1]
+m2 = best_global_params[2]
+c1 = best_global_params[3]
+c2 = best_global_params[4]
+v_angulaire1 = best_global_params[5]
+v_angulaire2 = best_global_params[6]
 
 angle1 = tracker_angle1[1]
 angle2 = tracker_angle2[1]

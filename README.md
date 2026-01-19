@@ -48,9 +48,8 @@ Error NRMSE : 30.198642125055535 %
 
 
 ## Video comparaison
-
-[![Comparaison pendule](images/Comparaison.png)](https://github.com/user-attachments/assets/7a7779fa-5f25-476c-bd03-d2e7725d95ea)
+https://github.com/user-attachments/assets/7a7779fa-5f25-476c-bd03-d2e7725d95ea
 
 ## Video predicition
 
-[![Comparaison pendule](images/Comparaison.png)](https://github.com/user-attachments/assets/7a7779fa-5f25-476c-bd03-d2e7725d95ea)
+https://github.com/user-attachments/assets/7a7779fa-5f25-476c-bd03-d2e7725d95ea

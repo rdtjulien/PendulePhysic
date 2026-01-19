@@ -129,7 +129,7 @@ best_global_params = nothing
 #Multiple optimization
 for k in 1:30
     #Initial parameters
-    initial = [k, 3.0, 0.0, 0.0, 0.0, 0.0]
+    initial = [k, 3.0, 0.01, 0.01, 0.0, 0.0]
 
     #Upper and lower bounds for the parameters
     lower = [0.1, 0.1, 0.0, 0.0, -10.0, -10.0]
@@ -159,7 +159,7 @@ for k in 1:30
     if local_rmse < best_global_rmse
         best_global_rmse = local_rmse
         best_global_params = copy(local_params)
-        println("Best ", local_nrmse)
+        println("Best ", local_nrmse," %")
     end
 end
 

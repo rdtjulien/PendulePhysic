@@ -150,8 +150,8 @@ for k in 1:30
     #Average amplitude for RMSE
     amp_moyenne = (amp_x1 + amp_y1 + amp_x2 + amp_y2) / 4
 
-    #SRMSE
-    local_srmse = (local_rmse / amp_moyenne) * 100
+    #NRMSE
+    local_nrmse = (local_rmse / amp_moyenne) * 100
 
     println("$k")
 
@@ -159,7 +159,7 @@ for k in 1:30
     if local_rmse < best_global_rmse
         best_global_rmse = local_rmse
         best_global_params = copy(local_params)
-        println("Best ", local_srmse)
+        println("Best ", local_nrmse)
     end
 end
 

@@ -14,7 +14,10 @@
 ├── 📁 tracker
 │    └──📄 physique_tracker.trk     #Tracker 
 │
-└── 📁 video                        #Result
+└── 📁 video                        
+     ├──📄 First_Video_2s.mp4       #Video model
+     ├──📄 Pendule.mp4              #Video comparaison
+     └──📄 prediction4sec.mp4       #Video prediction
 ```
 
 ## Setup
@@ -34,3 +37,20 @@ activate .
 ```
 instantiate
 ```
+
+To start Double_pendule.jl `alt+enter`
+
+## Positions comparaison
+
+![Positions comparaions](images/Position.png)
+
+Error NRMSE : 30.198642125055535 %
+
+
+## Video comparaison
+
+[![Comparaison pendule](images/Comparaison.png)](https://github.com/user-attachments/assets/7a7779fa-5f25-476c-bd03-d2e7725d95ea)
+
+## Video predicition
+
+[![Comparaison pendule](images/Comparaison.png)](https://github.com/user-attachments/assets/7a7779fa-5f25-476c-bd03-d2e7725d95ea)

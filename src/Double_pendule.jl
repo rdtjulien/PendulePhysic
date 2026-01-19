@@ -153,7 +153,7 @@ for k in 1:30
     #NRMSE
     local_nrmse = (local_rmse / amp_moyenne) * 100
 
-    println("$k")
+    println("Iteration : $k")
 
     #Best solution
     if local_rmse < best_global_rmse
